@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="360" viewBox="0 0 720 360" role="img" aria-label="Обложка: удержание сотрудников">
+  <defs>
+    <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ef4444"/>
+      <stop offset="1" stop-color="#991b1b"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="360" fill="url(#g4)"/>
+  <g fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <!-- якорь удержания -->
+    <circle cx="360" cy="120" r="20"/>
+    <path d="M360 140 V250"/>
+    <path d="M300 210 a80 80 0 1 0 120 0"/>
+    <path d="M322 188 l-28 -4 4 28"/>
+    <path d="M398 188 l28 -4 -4 28"/>
+  </g>
+  <text x="360" y="330" text-anchor="middle" font-family="Atkinson, sans-serif" font-size="30" fill="#ffffff" font-weight="700">Удержание</text>
+</svg>

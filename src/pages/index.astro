@@ -1,0 +1,147 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="ru">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="intro">
+				<h1>HR Digest</h1>
+				<p>
+					Дайджест практических материалов для тех, кто работает с командой: адаптация,
+					вовлечённость, найм, удержание сотрудников и технологии в работе HR.
+				</p>
+			</section>
+
+			<section class="cards">
+				<h2 class="section-title">Последние материалы</h2>
+				<ul>
+					{
+						posts.map((post) => (
+							<li class="card">
+								<a href={`/blog/${post.id}/`}>
+									{post.data.cover && (
+										<img
+											class="card-cover"
+											width={720}
+											height={360}
+											src={post.data.cover}
+											alt={post.data.title}
+											loading="lazy"
+										/>
+									)}
+									<div class="card-body">
+										<span class="card-category">{post.data.category}</span>
+										<h3 class="card-title">{post.data.title}</h3>
+										<p class="card-description">{post.data.description}</p>
+										<p class="card-date">
+											<FormattedDate date={post.data.pubDate} />
+										</p>
+									</div>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+		</main>
+		<Footer />
+		<style>
+			.intro {
+				text-align: center;
+				margin-bottom: 2em;
+			}
+			.intro h1 {
+				margin-bottom: 0.3em;
+			}
+			.intro p {
+				color: rgb(var(--gray));
+				max-width: 540px;
+				margin: 0 auto;
+			}
+			.section-title {
+				font-size: 1.5em;
+				margin-bottom: 1em;
+				text-align: center;
+			}
+			.cards ul {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 1.5rem;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+			}
+			.card {
+				background: #fff;
+				border-radius: 12px;
+				box-shadow: 0 2px 6px rgba(var(--gray), 25%);
+				overflow: hidden;
+				transition: 0.2s ease;
+			}
+			.card:hover {
+				box-shadow: var(--box-shadow);
+			}
+			.card a {
+				display: block;
+				text-decoration: none;
+				color: inherit;
+			}
+			.card-cover {
+				width: 100%;
+				height: 180px;
+				object-fit: cover;
+				display: block;
+				border-radius: 0;
+			}
+			.card-body {
+				padding: 1em 1.2em 1.4em;
+			}
+			.card-category {
+				display: inline-block;
+				padding: 0.15em 0.7em;
+				background-color: rgb(var(--gray-light));
+				border-radius: 999px;
+				font-size: 0.75em;
+				color: rgb(var(--gray-dark));
+				margin-bottom: 0.6em;
+			}
+			.card-title {
+				margin: 0 0 0.4em;
+				font-size: 1.25em;
+				color: rgb(var(--black));
+				line-height: 1.25;
+			}
+			.card-description {
+				margin: 0 0 0.7em;
+				color: rgb(var(--gray-dark));
+				font-size: 0.95em;
+				line-height: 1.5;
+			}
+			.card-date {
+				margin: 0;
+				color: rgb(var(--gray));
+				font-size: 0.85em;
+			}
+			@media (max-width: 720px) {
+				.cards ul {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</body>
+</html>
