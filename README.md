@@ -1,14 +1,14 @@
-# AI Digest
+# HR Digest
 
-Автоматический дайджест новостей AI, машинного обучения и больших языковых моделей.
+Автоматический дайджест материалов для HR: адаптация, вовлечённость, найм, удержание сотрудников и технологии в работе с командой.
 
-Проект курса **Claude Code Basics**. На протяжении восьми ступеней этот блог превращается из пустого шаблона в полностью автоматический пайплайн публикации.
+Проект курса **Claude Code Basics**: блог на Astro, который развивается в автоматический пайплайн публикации.
 
 ## Быстрый старт
 
 ```bash
-git clone <url-репозитория> ai-digest
-cd ai-digest
+git clone <url-репозитория> hr-digest
+cd hr-digest
 npm install
 npm run dev
 ```
@@ -27,10 +27,10 @@ npm run dev
 
 ```
 src/
-├── content/blog/    — Статьи дайджеста (markdown).
+├── content/blog/    — Статьи дайджеста (markdown с frontmatter).
 ├── components/      — Astro-компоненты.
 ├── layouts/         — Шаблоны страниц.
-├── pages/           — Маршруты: главная, блог, RSS.
+├── pages/           — Маршруты: главная, блог, RSS, about.
 ├── styles/          — Глобальные стили.
 └── assets/          — Изображения и обложки.
 ```
@@ -42,9 +42,11 @@ src/
 ```markdown
 ---
 title: 'Заголовок статьи'
-description: 'Краткое описание в 2–3 предложения.'
-pubDate: '2026-03-25'
-tags: ['llm', 'anthropic']
+description: 'Одно предложение до 160 символов.'
+pubDate: 2026-07-30
+cover: '/covers/1-adaptation.svg'
+category: 'Адаптация'
+tags: ['адаптация', 'онбординг']
 source: 'https://example.com/original-article'
 ---
 
@@ -53,6 +55,6 @@ source: 'https://example.com/original-article'
 
 ## Стек
 
-- [Astro](https://astro.build) — статический генератор сайтов.
+- [Astro](https://astro.build) 6 — статический генератор сайтов (`@astrojs/mdx`, `@astrojs/rss`, `@astrojs/sitemap`, `sharp`).
 - [Vercel](https://vercel.com) — деплой.
-- TypeScript.
+- TypeScript (strict). Node >= 22.12.0.
