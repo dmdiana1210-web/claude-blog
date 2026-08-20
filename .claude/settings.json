@@ -2,7 +2,7 @@
   "permissions": {
     "allow": [
       "Bash(ls:*)",
-      "Bash(pwd)",
+      "Bash(pwd:*)",
       "Bash(cat:*)",
       "Bash(find:*)"
     ],
