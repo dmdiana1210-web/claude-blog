@@ -1,0 +1,31 @@
+name: Style Check
+
+# Срабатывает на PR с изменениями в статьях блога.
+# Линтер — блокирующая проверка, judge — неблокирующая (if: always).
+# Внутри — заглушки с тестовыми данными. Реальные проверки — в следующем PR.
+on:
+  pull_request:
+    paths:
+      - 'src/content/blog/**'
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - name: Lint style (blocking)
+        run: node scripts/digest/lint-style.mjs
+      - name: LLM judge (non-blocking)
+        if: always()
+        run: node scripts/digest/llm-judge.mjs
+        # ANTHROPIC_API_KEY, GH_TOKEN, PR_NUMBER добавляются в следующем PR.

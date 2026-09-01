@@ -1,0 +1,30 @@
+name: Generate Digest
+
+# Запуск: еженедельно по понедельникам в 07:00 UTC + вручную (workflow_dispatch).
+# Внутри — заглушки, возвращающие тестовые данные. Реальная генерация — в следующем PR.
+on:
+  schedule:
+    - cron: '0 7 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - name: Select topic
+        run: node scripts/digest/select-topic.mjs
+      - name: Generate article
+        run: node scripts/digest/generate-article.mjs
+        # ANTHROPIC_API_KEY добавляется в следующем PR, когда заглушка сменится на реальный вызов.
+      - name: Create PR
+        run: node scripts/digest/create-pr.mjs
+        # GH_TOKEN добавляется в следующем PR, когда заглушка сменится на реальный вызов.
