@@ -4,3 +4,4 @@ node_modules
 .DS_Store
 .claude/settings.local.json
 scripts/digest/.selected-topic.json
+.astro/
