@@ -5,3 +5,4 @@ node_modules
 .claude/settings.local.json
 scripts/digest/.selected-topic.json
 .astro/
+з-08-ответ.txt

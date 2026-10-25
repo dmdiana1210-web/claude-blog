@@ -37,7 +37,7 @@ Frontmatter проверяется Zod-схемой в `src/content.config.ts` �
 
 - **Before writing or editing articles in `src/content/blog/`, read
   `.claude/rules/article-style.md`.** — стиль статей (8 правил), критерии
-  отбора новостей (5 правил), редполитика (5 правил).
+  отбора новостей (5 правил), редполитика (10 правил).
 - **Before committing or opening a PR, read
   `.claude/rules/git-conventions.md`.** — формат коммитов, длина subject line,
   именование веток, целевая ветка PR.
